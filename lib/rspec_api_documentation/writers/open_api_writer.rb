@@ -140,12 +140,12 @@ module RspecApiDocumentation
           current[:properties][field[:name]][:example] = field[:value] if field[:value] && field[:with_example]
           current[:properties][field[:name]][:default] = field[:default] if field[:default]
           current[:properties][field[:name]][:description] = field[:description] if field[:description]
-
           opts = {enum: field[:enum], minimum: field[:minimum], maximum: field[:maximum]}
 
           if current[:properties][field[:name]][:type] == :array
             current[:properties][field[:name]][:items] = field[:items] || OpenApi::Helper.extract_items(field[:value][0], opts)
           else
+            current[:properties][field[:name]][:properties] = field[:properties] if field[:properties]
             opts.each { |k, v| current[:properties][field[:name]][k] = v if v }
           end
 
