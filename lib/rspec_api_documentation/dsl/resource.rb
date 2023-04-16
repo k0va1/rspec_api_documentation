@@ -97,7 +97,7 @@ module RspecApiDocumentation::DSL
 
       def field_specification(name, *args)
         options = args.extract_options!
-        description = args.pop || "#{Array(options[:scope]).join(" ")} #{name}".humanize
+        description = args.pop || options[:description] || "#{Array(options[:scope]).join(" ")} #{name}".humanize
 
         options.merge(:name => name.to_s, :description => description)
       end
